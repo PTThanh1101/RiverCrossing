@@ -46,7 +46,6 @@
             TwelveSecbutton = new Button();
             Answerbutton = new Button();
             Boatbutton = new Button();
-            btnCR1 = new Button();
             ((System.ComponentModel.ISupportInitialize)GroundpictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)GroundpictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)OneSecondpictureBox).BeginInit();
@@ -149,6 +148,7 @@
             // Timelabel
             // 
             Timelabel.AutoSize = true;
+            Timelabel.BackColor = Color.White;
             Timelabel.Font = new Font("Segoe UI", 28.2F, FontStyle.Bold, GraphicsUnit.Point);
             Timelabel.Location = new Point(824, 159);
             Timelabel.Name = "Timelabel";
@@ -260,23 +260,13 @@
             Boatbutton.UseVisualStyleBackColor = true;
             Boatbutton.Click += Boatbutton_Click;
             // 
-            // btnCR1
-            // 
-            btnCR1.Location = new Point(12, 159);
-            btnCR1.Name = "btnCR1";
-            btnCR1.Size = new Size(94, 29);
-            btnCR1.TabIndex = 19;
-            btnCR1.Text = "button1";
-            btnCR1.UseVisualStyleBackColor = true;
-            btnCR1.Click += btnCR1_Click;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1771, 705);
-            Controls.Add(btnCR1);
             Controls.Add(Boatbutton);
             Controls.Add(Answerbutton);
             Controls.Add(TwelveSecbutton);
@@ -294,6 +284,7 @@
             Controls.Add(OneSecondpictureBox);
             Controls.Add(GroundpictureBox2);
             Controls.Add(GroundpictureBox1);
+            FormBorderStyle = FormBorderStyle.SizableToolWindow;
             Name = "Form1";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)GroundpictureBox1).EndInit();
@@ -321,7 +312,6 @@
         private Button TwelveSecbutton;
         private Button Answerbutton;
         private Button Boatbutton;
-        private Button btnCR1;
         public PictureBox OneSecondpictureBox;
         public PictureBox ThreeSecondpictureBox;
         public PictureBox SixSecondpictureBox1;

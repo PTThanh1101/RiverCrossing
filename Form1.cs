@@ -5,13 +5,14 @@
         public Form1()
         {
             InitializeComponent();
-            // Initialize selectedCharacterTime for each character
-
-
-
             Timelabel.Text = remainingTime.ToString();
-
+            CharactersOnForm.Add(OneSecondpictureBox);
+            CharactersOnForm.Add(ThreeSecondpictureBox);
+            CharactersOnForm.Add(SixSecondpictureBox1);
+            CharactersOnForm.Add(EightSecondpictureBox);
+            CharactersOnForm.Add(TwelveSecondpictureBox1);
         }
+        public List<PictureBox> CharactersOnForm = new List<PictureBox>();
         public Point oneStartLocation = new Point(369, 436);
         public Point oneBoatStartLocation = new Point(856, 489);
         public Point oneBoatEndLocation = new Point(1205, 489);
@@ -349,7 +350,7 @@
                     {
                         TwelveSecondpictureBox1.Location = GetCharacterBoatStartLocation(TwelveSecondpictureBox1);
                     }
-                    
+
                     // Calculate time to subtract based on characters on the boat
                     ThoiGianTon = TinhThoiGian();
                     // Subtract time from remainingTime
@@ -527,30 +528,30 @@
             TwelveSecondpictureBox1_Click(sender, e);
         }
 
-        public void Answerbutton_Click(object sender, EventArgs e)
+        public async void Answerbutton_Click(object sender, EventArgs e)
         {
-            PlayBackbutton1_Click(sender,e);
+            PlayBackbutton1_Click(sender, e);
             List<PictureBox> charactersToMove = new List<PictureBox>();
             charactersToMove.Add(OneSecondpictureBox); // Thêm các hình ảnh của nhân vật vào danh sách
             charactersToMove.Add(ThreeSecondpictureBox);
-            CrossCharacters(charactersToMove);
+            await CrossCharacters(charactersToMove);
             charactersToMove.Clear();
             charactersToMove.Add(OneSecondpictureBox);
-            CrossCharacters(charactersToMove);
+            await CrossCharacters(charactersToMove);
             charactersToMove.Add(SixSecondpictureBox1);
-            CrossCharacters(charactersToMove);
+            await CrossCharacters(charactersToMove);
             charactersToMove.Clear();
             charactersToMove.Add(OneSecondpictureBox);
-            CrossCharacters(charactersToMove);
+            await CrossCharacters(charactersToMove);
             charactersToMove.Clear();
             charactersToMove.Add(EightSecondpictureBox);
             charactersToMove.Add(TwelveSecondpictureBox1);
-            CrossCharacters(charactersToMove);
+            await CrossCharacters(charactersToMove);
             charactersToMove.Clear();
             charactersToMove.Add(ThreeSecondpictureBox);
-            CrossCharacters(charactersToMove);
+            await CrossCharacters(charactersToMove);
             charactersToMove.Add(OneSecondpictureBox);
-            CrossCharacters(charactersToMove);
+            await CrossCharacters(charactersToMove);
         }
 
         public void Boatbutton_Click(object sender, EventArgs e)
@@ -559,38 +560,293 @@
         }
 
 
-        public void btnCR1_Click(object sender, EventArgs e)
-        {
-            
 
-        }
-
-
-        public void CrossCharacters(List<PictureBox> characters)
+        public async Task CrossCharacters(List<PictureBox> characters)
         {
             // Di chuyển các nhân vật lên thuyền
             foreach (var character in characters)
             {
+                await Task.Delay(1000);
                 HandleCharacterClick(character);
-                System.Threading.Thread.Sleep(1000);
+                await Task.Delay(1000);
             }
-           
+
             // Di chuyển thuyền
             BoatpictureBox_Click_1(BoatpictureBox, EventArgs.Empty);
-            
+
 
             // Di chuyển các nhân vật ra khỏi thuyền
             foreach (var character in characters)
             {
-                System.Threading.Thread.Sleep(1000);
+                await Task.Delay(1000);
                 HandleCharacterClick(character);
-                
+                await Task.Delay(1000);
             }
         }
+
+        
+        //private void PerformActions(List<string> actions)
+        //{
+        //    foreach (string action in actions)
+        //    {
+        //        // Thực hiện hành động
+        //        switch (action)
+        //        {
+        //            case "Move OneSecondPictureBox to the other side":
+        //                MoveCharacter(OneSecondPictureBox, oneEndLocation);
+        //                break;
+        //            case "Move ThreeSecondPictureBox to the other side":
+        //                MoveCharacter(ThreeSecondPictureBox, threeEndLocation);
+        //                break;
+        //            case "Move SixSecondPictureBox1 to the other side":
+        //                MoveCharacter(SixSecondPictureBox1, sixEndLocation);
+        //                break;
+        //            case "Move EightSecondPictureBox to the other side":
+        //                MoveCharacter(EightSecondPictureBox, eightEndLocation);
+        //                break;
+        //            case "Move TwelveSecondPictureBox1 to the other side":
+        //                MoveCharacter(TwelveSecondPictureBox1, twelveEndLocation);
+        //                break;
+        //            default:
+        //                // Xử lý hành động không xác định
+        //                break;
+        //        }
+        //    }
+        //}
+
+        //private void MoveCharacter(PictureBox character, Point targetLocation)
+        //{
+        //    // Thực hiện di chuyển nhân vật đến vị trí đích
+        //    character.Location = targetLocation;
+        //    // Tạm dừng để hiển thị hoạt động (thời gian dừng có thể điều chỉnh)
+        //    System.Threading.Thread.Sleep(1000);
+        //}
+
+
     }
     //Xây dựng Thuật toán A*
-    
+    public class PathNode
+    {
+        public Point CharacterPosition { get; set; }
+        public Point BoatPosition { get; set; }
+        public List<string> Actions { get; set; }
 
-    
-    
+        public PathNode(Point characterPosition, Point boatPosition, List<string> actions)
+        {
+            CharacterPosition = characterPosition;
+            BoatPosition = boatPosition;
+            Actions = new List<string>(actions);
+        }
+    }
+
+    public class Pathfinding : Form1
+    {
+        // Hàm tìm đường đi sử dụng thuật toán A*
+        public List<string> FindPath(Point startCharacterPosition, Point startBoatPosition)
+        {
+            // Khởi tạo các biến và cấu trúc dữ liệu
+            List<string> path = new List<string>();
+            Queue<PathNode> openSet = new Queue<PathNode>();
+            HashSet<string> closedSet = new HashSet<string>();
+
+            int remainingTime = 30; // Thời gian ban đầu là 30 giây
+            int ThoiGianTon = 0;
+
+            // Khởi tạo nút ban đầu
+            List<string> initialActions = new List<string>();
+            PathNode startNode = new PathNode(startCharacterPosition, startBoatPosition, initialActions);
+            openSet.Enqueue(startNode);
+
+            // Bắt đầu thuật toán A*
+            while (openSet.Count > 0)
+            {
+                // Lấy nút hiện tại từ hàng đợi
+                PathNode currentNode = openSet.Dequeue();
+
+                // Kiểm tra điều kiện dừng
+                if (IsGoalState(currentNode, remainingTime))
+                {
+                    path = currentNode.Actions;
+                    break;
+                }
+
+                // Lặp qua các hướng di chuyển có thể
+                foreach (string action in GetPossibleActions(currentNode, remainingTime, ThoiGianTon))
+                {
+                    // Tạo một nút mới cho hướng di chuyển này
+                    PathNode neighborNode = CreateNeighborNode(currentNode, action);
+
+                    // Kiểm tra xem nút mới có hợp lệ không
+                    if (IsValidState(neighborNode, remainingTime, ThoiGianTon) && !closedSet.Contains(GetStateHash(neighborNode)))
+                    {
+                        openSet.Enqueue(neighborNode);
+                        closedSet.Add(GetStateHash(neighborNode));
+                    }
+                }
+            }
+
+            return path;
+        }
+
+        // Hàm kiểm tra điều kiện dừng
+        public bool IsGoalState(PathNode node, int remainingTime)
+        {
+            bool allCharactersAtEnd =
+                OneSecondpictureBox.Location == oneEndLocation &&
+                ThreeSecondpictureBox.Location == threeEndLocation &&
+                SixSecondpictureBox1.Location == sixEndLocation &&
+                EightSecondpictureBox.Location == eightEndLocation &&
+                TwelveSecondpictureBox1.Location == twelveEndLocation;
+            if (allCharactersAtEnd && remainingTime > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        // Hàm lấy các hướng di chuyển có thể
+        public List<string> GetPossibleActions(PathNode node, int remainingTime, int ThoiGianTon)
+        {
+            // Thêm logic để xác định các hướng di chuyển có thể
+            List<string> actions = new List<string>();
+
+            // Lấy danh sách nhân vật trên form
+            List<PictureBox> charactersOnForm = new List<PictureBox>
+        {
+            OneSecondpictureBox,
+            ThreeSecondpictureBox,
+            SixSecondpictureBox1,
+            EightSecondpictureBox,
+            TwelveSecondpictureBox1
+        };
+
+            // Duyệt qua từng nhân vật và kiểm tra xem nếu nhân vật có thể di chuyển thì thêm hướng di chuyển đó vào danh sách
+            foreach (var character in charactersOnForm)
+            {
+                if (IsValidMove(node, character, remainingTime, ThoiGianTon))
+                {
+                    List<PictureBox> charactersToMove = new List<PictureBox> { character };
+                    CrossCharacters(charactersToMove);
+
+                    // Lấy ra hành động sau khi di chuyển
+                    actions.Add($"Move {character.Name} to the other side");
+                }
+            }
+            return actions;
+        }
+
+        public bool IsValidMove(PathNode node, PictureBox character, int remainingTime, int ThoiGianTon)
+        {
+            // Đảm bảo rằng nhân vật đang ở vị trí hiện tại
+            if (character.Location != node.CharacterPosition)
+            {
+                return false;
+            }
+            // Đảm bảo rằng thuyền ở đúng vị trí
+            if (BoatpictureBox.Location != node.BoatPosition)
+            {
+                return false;
+            }
+
+            if (remainingTime <= ThoiGianTon)
+            {
+                return false;
+            }
+            // Đảm bảo rằng nhân vật có thể di chuyển đến một vị trí hợp lệ trên thuyền
+
+            if (BoatpictureBox.Location == boatStartLocation)
+            {
+                if (character.Location != GetCharacterStartLocation(character))
+                {
+                    return false;
+                }
+            }
+            else if (BoatpictureBox.Location == boatEndLocation)
+            {
+                if (character.Location != GetCharacterBoatEndLocation(character))
+                {
+                    return false;
+                }
+            }
+            // Nếu tất cả điều kiện đều đúng, thì bước di chuyển này là hợp lệ
+            return true;
+        }
+
+        // Hàm tạo một nút cho một hướng di chuyển
+        public PathNode CreateNeighborNode(PathNode node, string action)
+        {
+            // Sao chép thông tin từ nút gốc sang nút mới
+            PathNode neighborNode = new PathNode(node.CharacterPosition, node.BoatPosition, new List<string>(node.Actions));
+
+
+            CrossCharacters(CharactersOnForm);
+
+            // Cập nhật hành động cho nút mới
+            neighborNode.Actions.Add(action);
+
+            // Trừ thời gian di chuyển từ thời gian còn lại
+            remainingTime -= ThoiGianTon;
+
+            return neighborNode;
+        }
+
+        // Hàm kiểm tra xem nút có hợp lệ không
+        public bool IsValidState(PathNode node, int remainingTime, int ThoiGianTon)
+        {
+            // Đảm bảo rằng thuyền ở đúng vị trí
+            if (BoatpictureBox.Location != node.BoatPosition)
+            {
+                return false;
+            }
+
+            if (remainingTime <= ThoiGianTon)
+            {
+                return false;
+            }
+
+            // Đảm bảo rằng tất cả nhân vật có thể di chuyển đến vị trí hợp lệ trên thuyền
+            foreach (var character in CharactersOnForm)
+            {
+                if (BoatpictureBox.Location == boatStartLocation &&
+                    character.Location != GetCharacterStartLocation(character))
+                {
+                    return false;
+                }
+                if (BoatpictureBox.Location == boatEndLocation &&
+                    character.Location != GetCharacterBoatEndLocation(character))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        // Hàm lấy mã hash của trạng thái nút
+        public string GetStateHash(PathNode node)
+        {
+            List<string> components = new List<string>();
+
+            // Thêm vị trí của nhân vật
+            components.Add($"Character_{node.CharacterPosition.X}_{node.CharacterPosition.Y}");
+
+            // Thêm vị trí của thuyền
+            components.Add($"Boat_{node.BoatPosition.X}_{node.BoatPosition.Y}");
+
+            // Thêm thời gian còn lại
+            components.Add($"Time_{remainingTime}");
+
+            // Sắp xếp các thành phần
+            components.Sort();
+
+            // Tạo mã hash bằng cách nối các thành phần đã sắp xếp
+            string hash = string.Join("_", components);
+
+            return hash;
+        }
+
+    }
+
+
+
 }
