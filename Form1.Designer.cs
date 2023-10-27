@@ -46,6 +46,7 @@
             TwelveSecbutton = new Button();
             Answerbutton = new Button();
             Boatbutton = new Button();
+            btnCR1 = new Button();
             ((System.ComponentModel.ISupportInitialize)GroundpictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)GroundpictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)OneSecondpictureBox).BeginInit();
@@ -259,12 +260,23 @@
             Boatbutton.UseVisualStyleBackColor = true;
             Boatbutton.Click += Boatbutton_Click;
             // 
+            // btnCR1
+            // 
+            btnCR1.Location = new Point(12, 159);
+            btnCR1.Name = "btnCR1";
+            btnCR1.Size = new Size(94, 29);
+            btnCR1.TabIndex = 19;
+            btnCR1.Text = "button1";
+            btnCR1.UseVisualStyleBackColor = true;
+            btnCR1.Click += btnCR1_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1771, 705);
+            Controls.Add(btnCR1);
             Controls.Add(Boatbutton);
             Controls.Add(Answerbutton);
             Controls.Add(TwelveSecbutton);
@@ -300,12 +312,6 @@
 
         private PictureBox GroundpictureBox1;
         private PictureBox GroundpictureBox2;
-        private PictureBox OneSecondpictureBox;
-        private PictureBox ThreeSecondpictureBox;
-        private PictureBox SixSecondpictureBox1;
-        private PictureBox EightSecondpictureBox;
-        private PictureBox TwelveSecondpictureBox1;
-        private PictureBox BoatpictureBox;
         private Label Timelabel;
         private Button PlayBackbutton1;
         private Button OneSecbutton;
@@ -315,5 +321,12 @@
         private Button TwelveSecbutton;
         private Button Answerbutton;
         private Button Boatbutton;
+        private Button btnCR1;
+        public PictureBox OneSecondpictureBox;
+        public PictureBox ThreeSecondpictureBox;
+        public PictureBox SixSecondpictureBox1;
+        public PictureBox EightSecondpictureBox;
+        public PictureBox TwelveSecondpictureBox1;
+        public PictureBox BoatpictureBox;
     }
 }

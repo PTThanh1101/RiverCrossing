@@ -12,45 +12,37 @@
             Timelabel.Text = remainingTime.ToString();
 
         }
+        public Point oneStartLocation = new Point(369, 436);
+        public Point oneBoatStartLocation = new Point(856, 489);
+        public Point oneBoatEndLocation = new Point(1205, 489);
+        public Point oneEndLocation = new Point(1663, 436);
 
+        public Point threeStartLocation = new Point(279, 436);
+        public Point threeBoatStartLocation = new Point(787, 489);
+        public Point threeBoatEndLocation = new Point(1136, 489);
+        public Point threeEndLocation = new Point(1573, 436);
 
-        private Point oneStartLocation = new Point(369, 436);
-        private Point oneBoatStartLocation = new Point(856, 489);
-        private Point oneBoatEndLocation = new Point(1205, 489);
-        private Point oneEndLocation = new Point(1663, 436);
+        public Point sixStartLocation = new Point(190, 436);
+        public Point sixBoatStartLocation = new Point(718, 489);
+        public Point sixBoatEndLocation = new Point(1067, 489);
+        public Point sixEndLocation = new Point(1484, 436);
 
-        private Point threeStartLocation = new Point(279, 436);
-        private Point threeBoatStartLocation = new Point(787, 489);
-        private Point threeBoatEndLocation = new Point(1136, 489);
-        private Point threeEndLocation = new Point(1573, 436);
+        public Point eightStartLocation = new Point(101, 436);
+        public Point eightBoatStartLocation = new Point(576, 489);
+        public Point eightBoatEndLocation = new Point(925, 489);
+        public Point eightEndLocation = new Point(1395, 436);
 
-        private Point sixStartLocation = new Point(190, 436);
-        private Point sixBoatStartLocation = new Point(718, 489);
-        private Point sixBoatEndLocation = new Point(1067, 489);
-        private Point sixEndLocation = new Point(1484, 436);
+        public Point twelveStartLocation = new Point(12, 436);
+        public Point twelveBoatStartLocation = new Point(507, 489);
+        public Point twelveBoatEndLocation = new Point(856, 489);
+        public Point twelveEndLocation = new Point(1306, 436);
 
-        private Point eightStartLocation = new Point(101, 436);
-        private Point eightBoatStartLocation = new Point(576, 489);
-        private Point eightBoatEndLocation = new Point(925, 489);
-        private Point eightEndLocation = new Point(1395, 436);
+        public Point boatStartLocation = new Point(468, 548);
+        public Point boatEndLocation = new Point(818, 548);
 
-        private Point twelveStartLocation = new Point(12, 436);
-        private Point twelveBoatStartLocation = new Point(507, 489);
-        private Point twelveBoatEndLocation = new Point(856, 489);
-        private Point twelveEndLocation = new Point(1306, 436);
-
-        private Point boatStartLocation = new Point(468, 548);
-        private Point boatEndLocation = new Point(818, 548);
-
-        private int remainingTime = 30; // Thời gian ban đầu là 30 giây
-
-
-
-
-
-
-
-        private Point GetCharacterStartLocation(PictureBox characterPictureBox)
+        public int remainingTime = 30; // Thời gian ban đầu là 30 giây
+        public int ThoiGianTon = 0;
+        public Point GetCharacterStartLocation(PictureBox characterPictureBox)
         {
             // Dựa vào tên của PictureBox để trả về vị trí StartLocation của nhân vật
             switch (characterPictureBox.Name)
@@ -70,7 +62,7 @@
             }
         }
 
-        private Point GetCharacterBoatStartLocation(PictureBox characterPictureBox)
+        public Point GetCharacterBoatStartLocation(PictureBox characterPictureBox)
         {
             // Kiểm tra xem nhân vật đó có trên thuyền khi thuyền ở vị trí ban đầu
             if (BoatpictureBox.Location == boatStartLocation)
@@ -95,7 +87,7 @@
             // Trường hợp không nằm trên thuyền khi thuyền ở vị trí ban đầu
             return Point.Empty;
         }
-        private Point GetCharacterBoatEndLocation(PictureBox characterPictureBox)
+        public Point GetCharacterBoatEndLocation(PictureBox characterPictureBox)
         {
             // Kiểm tra xem nhân vật đó có trên thuyền khi thuyền ở vị trí ban đầu
             if (BoatpictureBox.Location == boatEndLocation)
@@ -121,7 +113,7 @@
             return Point.Empty; // Trường hợp không nằm trên thuyền khi thuyền ở vị trí ban đầu
         }
 
-        private Point GetCharacterEndLocation(PictureBox characterPictureBox)
+        public Point GetCharacterEndLocation(PictureBox characterPictureBox)
         {
             // Dựa vào tên của PictureBox để trả về vị trí EndLocation của nhân vật
             switch (characterPictureBox.Name)
@@ -142,45 +134,34 @@
         }
 
 
-
-        private int GetCharacterTime(PictureBox characterPictureBox)
-        {
-
-            return 0; // Đây là giá trị mặc định, bạn cần thay đổi nó dựa trên logic của bạn.
-        }
-
-
-
-        private void EightSecondpictureBox_Click(object sender, EventArgs e)
+        public void EightSecondpictureBox_Click(object sender, EventArgs e)
         {
             HandleCharacterClick(EightSecondpictureBox);
         }
 
-        private void ThreeSecondpictureBox_Click(object sender, EventArgs e)
+        public void ThreeSecondpictureBox_Click(object sender, EventArgs e)
         {
             HandleCharacterClick(ThreeSecondpictureBox);
         }
 
-        private void OneSecondpictureBox_Click(object sender, EventArgs e)
+        public void OneSecondpictureBox_Click(object sender, EventArgs e)
         {
             HandleCharacterClick(OneSecondpictureBox);
 
         }
 
-        private void SixSecondpictureBox1_Click(object sender, EventArgs e)
+        public void SixSecondpictureBox1_Click(object sender, EventArgs e)
         {
             HandleCharacterClick(SixSecondpictureBox1);
         }
 
-        private void TwelveSecondpictureBox1_Click(object sender, EventArgs e)
+        public void TwelveSecondpictureBox1_Click(object sender, EventArgs e)
         {
             HandleCharacterClick(TwelveSecondpictureBox1);
         }
 
-        private void HandleCharacterClick(PictureBox characterPictureBox)
+        public void HandleCharacterClick(PictureBox characterPictureBox)
         {
-
-
             // Kiểm tra xem nhân vật có thể di chuyển từ StartLocation đến BoatStartLocation hay không
             if (characterPictureBox.Location == GetCharacterStartLocation(characterPictureBox) &&
                 BoatpictureBox.Location == boatStartLocation)
@@ -211,10 +192,8 @@
 
         }
 
-        private void BoatpictureBox_Click_1(object sender, EventArgs e)
+        public void BoatpictureBox_Click_1(object sender, EventArgs e)
         {
-
-
             // Đếm số lượng nhân vật trên thuyền tại cả hai vị trí
             int numberOfCharactersOnBoatStart = CountCharactersOnBoatStart();
             int numberOfCharactersOnBoatEnd = CountCharactersOnBoatEnd();
@@ -257,20 +236,10 @@
                     {
                         TwelveSecondpictureBox1.Location = GetCharacterBoatEndLocation(TwelveSecondpictureBox1);
                     }
-                    int timeToSubtract = 0;
-                    if (OneSecondpictureBox.Location == oneBoatEndLocation)
-                        timeToSubtract = 1;
-                    else if (ThreeSecondpictureBox.Location == threeBoatEndLocation)
-                        timeToSubtract = 3;
-                    else if (SixSecondpictureBox1.Location == sixBoatEndLocation)
-                        timeToSubtract = 6;
-                    else if (EightSecondpictureBox.Location == eightBoatEndLocation)
-                        timeToSubtract = 8;
-                    else if (TwelveSecondpictureBox1.Location == twelveBoatEndLocation)
-                        timeToSubtract = 12;
+                    ThoiGianTon = TinhThoiGian();
 
                     // Subtract time from remainingTime
-                    remainingTime -= timeToSubtract;
+                    remainingTime -= ThoiGianTon;
 
                     // Update the time label
                     Timelabel.Text = remainingTime.ToString();
@@ -301,24 +270,9 @@
                         TwelveSecondpictureBox1.Location = GetCharacterBoatEndLocation(TwelveSecondpictureBox1);
                     }
                     // Calculate time to subtract based on characters on the boat
-                    int timeToSubtract = 0;
-                    List<int> characterTimes = new List<int>();
-                    if (OneSecondpictureBox.Location == oneBoatEndLocation)
-                        characterTimes.Add(1);
-                    if (ThreeSecondpictureBox.Location == threeBoatEndLocation)
-                        characterTimes.Add(3);
-                    if (SixSecondpictureBox1.Location == sixBoatEndLocation)
-                        characterTimes.Add(6);
-                    if (EightSecondpictureBox.Location == eightBoatEndLocation)
-                        characterTimes.Add(8);
-                    if (TwelveSecondpictureBox1.Location == twelveBoatEndLocation)
-                        characterTimes.Add(12);
-
-                    timeToSubtract = characterTimes.Max();
-
+                    ThoiGianTon = TinhThoiGian();
                     // Subtract time from remainingTime
-                    remainingTime -= timeToSubtract;
-
+                    remainingTime -= ThoiGianTon;
                     // Update the time label
                     Timelabel.Text = remainingTime.ToString();
                 }
@@ -358,26 +312,14 @@
                     {
                         EightSecondpictureBox.Location = GetCharacterBoatStartLocation(EightSecondpictureBox);
                     }
-                    else if (TwelveSecondpictureBox1.Location == twelveBoatStartLocation)
+                    else if (TwelveSecondpictureBox1.Location == twelveBoatEndLocation)
                     {
                         TwelveSecondpictureBox1.Location = GetCharacterBoatStartLocation(TwelveSecondpictureBox1);
                     }
                     // Calculate time to subtract based on characters on the boat
-                    int timeToSubtract = 0;
-                    if (OneSecondpictureBox.Location == oneBoatStartLocation)
-                        timeToSubtract = 1;
-                    else if (ThreeSecondpictureBox.Location == threeBoatStartLocation)
-                        timeToSubtract = 3;
-                    else if (SixSecondpictureBox1.Location == sixBoatStartLocation)
-                        timeToSubtract = 6;
-                    else if (EightSecondpictureBox.Location == eightBoatStartLocation)
-                        timeToSubtract = 8;
-                    else if (TwelveSecondpictureBox1.Location == twelveBoatStartLocation)
-                        timeToSubtract = 12;
-
+                    ThoiGianTon = TinhThoiGian();
                     // Subtract time from remainingTime
-                    remainingTime -= timeToSubtract;
-
+                    remainingTime -= ThoiGianTon;
                     // Update the time label
                     Timelabel.Text = remainingTime.ToString();
                 }
@@ -403,29 +345,15 @@
                     {
                         EightSecondpictureBox.Location = GetCharacterBoatStartLocation(EightSecondpictureBox);
                     }
-                    if (TwelveSecondpictureBox1.Location == twelveBoatStartLocation)
+                    if (TwelveSecondpictureBox1.Location == twelveBoatEndLocation)
                     {
                         TwelveSecondpictureBox1.Location = GetCharacterBoatStartLocation(TwelveSecondpictureBox1);
                     }
+                    
                     // Calculate time to subtract based on characters on the boat
-                    int timeToSubtract = 0;
-                    List<int> characterTimes = new List<int>();
-                    if (OneSecondpictureBox.Location == oneBoatStartLocation)
-                        characterTimes.Add(1);
-                    if (ThreeSecondpictureBox.Location == threeBoatStartLocation)
-                        characterTimes.Add(3);
-                    if (SixSecondpictureBox1.Location == sixBoatStartLocation)
-                        characterTimes.Add(6);
-                    if (EightSecondpictureBox.Location == eightBoatStartLocation)
-                        characterTimes.Add(8);
-                    if (TwelveSecondpictureBox1.Location == twelveBoatStartLocation)
-                        characterTimes.Add(12);
-
-                    timeToSubtract = characterTimes.Max();
-
+                    ThoiGianTon = TinhThoiGian();
                     // Subtract time from remainingTime
-                    remainingTime -= timeToSubtract;
-
+                    remainingTime -= ThoiGianTon;
                     // Update the time label
                     Timelabel.Text = remainingTime.ToString();
                 }
@@ -434,9 +362,62 @@
             // Kiểm tra điều kiện chiến thắng sau mỗi lần di chuyển
             CheckWin();
         }
+        public int TinhThoiGian()
+        {
+            if (CountCharactersOnBoatStart() == 1 || CountCharactersOnBoatEnd() == 1)
+            {
+                if (OneSecondpictureBox.Location == oneBoatEndLocation)
+                    ThoiGianTon = 1;
+                else if (ThreeSecondpictureBox.Location == threeBoatEndLocation)
+                    ThoiGianTon = 3;
+                else if (SixSecondpictureBox1.Location == sixBoatEndLocation)
+                    ThoiGianTon = 6;
+                else if (EightSecondpictureBox.Location == eightBoatEndLocation)
+                    ThoiGianTon = 8;
+                else if (TwelveSecondpictureBox1.Location == twelveBoatEndLocation)
+                    ThoiGianTon = 12;
+                if (OneSecondpictureBox.Location == oneBoatStartLocation)
+                    ThoiGianTon = 1;
+                else if (ThreeSecondpictureBox.Location == threeBoatStartLocation)
+                    ThoiGianTon = 3;
+                else if (SixSecondpictureBox1.Location == sixBoatStartLocation)
+                    ThoiGianTon = 6;
+                else if (EightSecondpictureBox.Location == eightBoatStartLocation)
+                    ThoiGianTon = 8;
+                else if (TwelveSecondpictureBox1.Location == twelveBoatStartLocation)
+                    ThoiGianTon = 12;
+
+            }
+            else if (CountCharactersOnBoatStart() == 2 || CountCharactersOnBoatEnd() == 2)
+            {
+                List<int> characterTimes = new List<int>();
+                if (OneSecondpictureBox.Location == oneBoatEndLocation)
+                    characterTimes.Add(1);
+                if (ThreeSecondpictureBox.Location == threeBoatEndLocation)
+                    characterTimes.Add(3);
+                if (SixSecondpictureBox1.Location == sixBoatEndLocation)
+                    characterTimes.Add(6);
+                if (EightSecondpictureBox.Location == eightBoatEndLocation)
+                    characterTimes.Add(8);
+                if (TwelveSecondpictureBox1.Location == twelveBoatEndLocation)
+                    characterTimes.Add(12);
+                if (OneSecondpictureBox.Location == oneBoatStartLocation)
+                    characterTimes.Add(1);
+                if (ThreeSecondpictureBox.Location == threeBoatStartLocation)
+                    characterTimes.Add(3);
+                if (SixSecondpictureBox1.Location == sixBoatStartLocation)
+                    characterTimes.Add(6);
+                if (EightSecondpictureBox.Location == eightBoatStartLocation)
+                    characterTimes.Add(8);
+                if (TwelveSecondpictureBox1.Location == twelveBoatStartLocation)
+                    characterTimes.Add(12);
+                ThoiGianTon = characterTimes.Max();
+            }
+            return ThoiGianTon;
+        }
 
         // Hàm để đếm số lượng nhân vật trên thuyền tại CharacterBoatStartLocation
-        private int CountCharactersOnBoatStart()
+        public int CountCharactersOnBoatStart()
         {
             int count = 0;
             if (OneSecondpictureBox.Location == GetCharacterBoatStartLocation(OneSecondpictureBox))
@@ -453,7 +434,7 @@
         }
 
         // Hàm để đếm số lượng nhân vật trên thuyền tại CharacterBoatEndLocation
-        private int CountCharactersOnBoatEnd()
+        public int CountCharactersOnBoatEnd()
         {
             int count = 0;
             if (OneSecondpictureBox.Location == GetCharacterBoatEndLocation(OneSecondpictureBox))
@@ -468,12 +449,7 @@
                 count++;
             return count;
         }
-
-
-
-
-
-        private bool CheckWin()
+        public bool CheckWin()
         {
             bool allCharactersAtEnd =
            OneSecondpictureBox.Location == oneEndLocation &&
@@ -510,7 +486,7 @@
             return false;
         }
 
-        private void PlayBackbutton1_Click(object sender, EventArgs e)
+        public void PlayBackbutton1_Click(object sender, EventArgs e)
         {
             // Đặt lại vị trí của tất cả các nhân vật về vị trí ban đầu
             OneSecondpictureBox.Location = oneStartLocation;
@@ -525,43 +501,96 @@
             Timelabel.Text = remainingTime.ToString();
         }
 
-        private void OneSecbutton_Click(object sender, EventArgs e)
+        public void OneSecbutton_Click(object sender, EventArgs e)
         {
             // Gọi sự kiện OneSecondpictureBox_Click
             OneSecondpictureBox_Click(sender, e);
         }
 
-        private void ThreeSecbutton_Click(object sender, EventArgs e)
+        public void ThreeSecbutton_Click(object sender, EventArgs e)
         {
             ThreeSecondpictureBox_Click(sender, e);
         }
 
-        private void SixSecbutton_Click(object sender, EventArgs e)
+        public void SixSecbutton_Click(object sender, EventArgs e)
         {
             SixSecondpictureBox1_Click(sender, e);
         }
 
-        private void EightSecbutton_Click(object sender, EventArgs e)
+        public void EightSecbutton_Click(object sender, EventArgs e)
         {
             EightSecondpictureBox_Click(sender, e);
         }
 
-        private void TwelveSecbutton_Click(object sender, EventArgs e)
+        public void TwelveSecbutton_Click(object sender, EventArgs e)
         {
             TwelveSecondpictureBox1_Click(sender, e);
         }
 
-        private void Answerbutton_Click(object sender, EventArgs e)
+        public void Answerbutton_Click(object sender, EventArgs e)
         {
-
+            PlayBackbutton1_Click(sender,e);
+            List<PictureBox> charactersToMove = new List<PictureBox>();
+            charactersToMove.Add(OneSecondpictureBox); // Thêm các hình ảnh của nhân vật vào danh sách
+            charactersToMove.Add(ThreeSecondpictureBox);
+            CrossCharacters(charactersToMove);
+            charactersToMove.Clear();
+            charactersToMove.Add(OneSecondpictureBox);
+            CrossCharacters(charactersToMove);
+            charactersToMove.Add(SixSecondpictureBox1);
+            CrossCharacters(charactersToMove);
+            charactersToMove.Clear();
+            charactersToMove.Add(OneSecondpictureBox);
+            CrossCharacters(charactersToMove);
+            charactersToMove.Clear();
+            charactersToMove.Add(EightSecondpictureBox);
+            charactersToMove.Add(TwelveSecondpictureBox1);
+            CrossCharacters(charactersToMove);
+            charactersToMove.Clear();
+            charactersToMove.Add(ThreeSecondpictureBox);
+            CrossCharacters(charactersToMove);
+            charactersToMove.Add(OneSecondpictureBox);
+            CrossCharacters(charactersToMove);
         }
 
-        private void Boatbutton_Click(object sender, EventArgs e)
+        public void Boatbutton_Click(object sender, EventArgs e)
         {
             BoatpictureBox_Click_1(sender, e);
         }
+
+
+        public void btnCR1_Click(object sender, EventArgs e)
+        {
+            
+
+        }
+
+
+        public void CrossCharacters(List<PictureBox> characters)
+        {
+            // Di chuyển các nhân vật lên thuyền
+            foreach (var character in characters)
+            {
+                HandleCharacterClick(character);
+                System.Threading.Thread.Sleep(1000);
+            }
+           
+            // Di chuyển thuyền
+            BoatpictureBox_Click_1(BoatpictureBox, EventArgs.Empty);
+            
+
+            // Di chuyển các nhân vật ra khỏi thuyền
+            foreach (var character in characters)
+            {
+                System.Threading.Thread.Sleep(1000);
+                HandleCharacterClick(character);
+                
+            }
+        }
     }
+    //Xây dựng Thuật toán A*
+    
 
-
-
+    
+    
 }
