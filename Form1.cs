@@ -584,7 +584,7 @@
             }
         }
 
-        
+
         //private void PerformActions(List<string> actions)
         //{
         //    foreach (string action in actions)
@@ -619,8 +619,19 @@
         //    // Thực hiện di chuyển nhân vật đến vị trí đích
         //    character.Location = targetLocation;
         //    // Tạm dừng để hiển thị hoạt động (thời gian dừng có thể điều chỉnh)
-        //    System.Threading.Thread.Sleep(1000);
+        //    
         //}
+        // Tạo một trạng thái ban đầu với các thông tin hiện tại
+        //PathNode initialNode = new PathNode(OneSecondpictureBox.Location, BoatpictureBox.Location, remainingTime);
+
+        // Khởi tạo lớp Pathfinding
+        //Pathfinding pathfinding = new Pathfinding();
+
+        // Gọi hàm tìm đường để lấy danh sách các hành động để di chuyển
+        //List<string> actions = pathfinding.FindPathToGoal(initialNode);
+
+        // Thực hiện các hành động bằng cách gọi phương thức PerformActions
+        // PerformActions(actions);
 
 
     }
@@ -630,11 +641,13 @@
         public Point CharacterPosition { get; set; }
         public Point BoatPosition { get; set; }
         public List<string> Actions { get; set; }
+        public int RemainingTime { get; set; }
 
-        public PathNode(Point characterPosition, Point boatPosition, List<string> actions)
+        public PathNode(Point characterPosition, Point boatPosition, int remainingTime, List<string> actions)
         {
             CharacterPosition = characterPosition;
             BoatPosition = boatPosition;
+            RemainingTime = remainingTime;
             Actions = new List<string>(actions);
         }
     }
@@ -654,7 +667,7 @@
 
             // Khởi tạo nút ban đầu
             List<string> initialActions = new List<string>();
-            PathNode startNode = new PathNode(startCharacterPosition, startBoatPosition, initialActions);
+            PathNode startNode = new PathNode(startCharacterPosition, startBoatPosition, remainingTime, initialActions);
             openSet.Enqueue(startNode);
 
             // Bắt đầu thuật toán A*
@@ -698,6 +711,22 @@
                 EightSecondpictureBox.Location == eightEndLocation &&
                 TwelveSecondpictureBox1.Location == twelveEndLocation;
             if (allCharactersAtEnd && remainingTime > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool IsInitialState(PathNode node, int remainingTime)
+        {
+            bool allCharactersAtStart =
+                OneSecondpictureBox.Location == oneEndLocation &&
+                ThreeSecondpictureBox.Location == threeEndLocation &&
+                SixSecondpictureBox1.Location == sixEndLocation &&
+                EightSecondpictureBox.Location == eightEndLocation &&
+                TwelveSecondpictureBox1.Location == twelveEndLocation &&
+                BoatpictureBox.Location == boatStartLocation;
+            if (allCharactersAtStart == true && remainingTime == 30)
             {
                 return true;
             }
@@ -776,7 +805,7 @@
         public PathNode CreateNeighborNode(PathNode node, string action)
         {
             // Sao chép thông tin từ nút gốc sang nút mới
-            PathNode neighborNode = new PathNode(node.CharacterPosition, node.BoatPosition, new List<string>(node.Actions));
+            PathNode neighborNode = new PathNode(node.CharacterPosition, node.BoatPosition, node.RemainingTime, new List<string>(node.Actions));
 
 
             CrossCharacters(CharactersOnForm);

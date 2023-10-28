@@ -157,13 +157,14 @@
             // 
             // PlayBackbutton1
             // 
+            PlayBackbutton1.BackColor = Color.FromArgb(192, 255, 255);
             PlayBackbutton1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
             PlayBackbutton1.Location = new Point(1, -1);
             PlayBackbutton1.Name = "PlayBackbutton1";
             PlayBackbutton1.Size = new Size(138, 126);
             PlayBackbutton1.TabIndex = 11;
             PlayBackbutton1.Text = "CHƠI LẠI";
-            PlayBackbutton1.UseVisualStyleBackColor = true;
+            PlayBackbutton1.UseVisualStyleBackColor = false;
             PlayBackbutton1.Click += PlayBackbutton1_Click;
             // 
             // OneSecbutton
@@ -238,19 +239,21 @@
             // 
             // Answerbutton
             // 
+            Answerbutton.BackColor = Color.FromArgb(192, 255, 255);
             Answerbutton.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
+            Answerbutton.ForeColor = Color.Black;
             Answerbutton.Location = new Point(155, -1);
             Answerbutton.Name = "Answerbutton";
             Answerbutton.Size = new Size(138, 126);
             Answerbutton.TabIndex = 17;
             Answerbutton.Text = "ĐÁP ÁN";
-            Answerbutton.UseVisualStyleBackColor = true;
+            Answerbutton.UseVisualStyleBackColor = false;
             Answerbutton.Click += Answerbutton_Click;
             // 
             // Boatbutton
             // 
             Boatbutton.BackgroundImage = (Image)resources.GetObject("Boatbutton.BackgroundImage");
-            Boatbutton.BackgroundImageLayout = ImageLayout.Zoom;
+            Boatbutton.BackgroundImageLayout = ImageLayout.Stretch;
             Boatbutton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             Boatbutton.Location = new Point(1385, 1);
             Boatbutton.Name = "Boatbutton";
